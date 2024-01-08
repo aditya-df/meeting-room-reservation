@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class SignController {
-
 	@GetMapping("/login")
 	public String index(Model model) {
 		return "page/login";

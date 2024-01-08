@@ -5,19 +5,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserController {
-	@GetMapping("/user")
+public class ReservationController {
+	@GetMapping("/reservation")
 	public String index(Model model) {
-		return "page/user/index";
+		return "page/reservation/index";
 	}
 
-	@GetMapping("/user/create")
+	@GetMapping("/reservation/create")
 	public String create(Model model) {
-		return "page/user/create";
+		return "page/reservation/create";
 	}
 
-	@GetMapping("/user/detail")
-	public String detail(Model model) {
-		return "page/user/detail";
+	@GetMapping("/reservation/review")
+	public String review(Model model) {
+		return "page/reservation/review";
 	}
+	
 }
