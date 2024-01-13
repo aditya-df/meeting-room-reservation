@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -32,8 +34,9 @@ public class UserController {
 	}
 
 	@PostMapping("/{id}")
-	public String detailUpdate(Model model, @PathVariable Long id) {
-		model.addAttribute("message", "Hello, Thymeleaf!");
+	public String detailUpdate(HttpServletRequest request, Model model, @PathVariable Long id) {
+		String customAttribute = (String) request.getAttribute("customAttribute");
+		model.addAttribute("Username", customAttribute);
 		return "page/user/detail";
 	}
 }
