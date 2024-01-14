@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/htmlhead::head}">
+</head>
+<style>
+  .inner {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    float: right;
+  }
+</style>
+<body>
+    <nav th:replace="~{fragments/header::header}">
+    </nav>
+    <aside th:replace="~{fragments/sidemenu::aside-menu}">
+    </aside>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h3 class="header">Reservation On Review</h3>
+                </div>
+            </div>
+            <table class="striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th style="text-align: center;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Room 1</td>
+                    <td class="inner">
+                        <form th:action="@{/reservation/approve/1}" method="post">
+                          <button class="btn green">
+                            <i class="material-icons">check</i>
+                          </button>
+                        </form>
+                        <form th:action="@{/reservation/reject/1}" method="post">
+                          <button class="btn red">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </form>
+                        <button class="btn waves-effect waves-light open-room" th:data-link="@{/room/1}">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer::footer}">
+    </footer>
+    <div th:replace="~{fragments/generalscript::generalscript}">
+    </div>
+    <script>
+      document.querySelectorAll(".open-room").forEach((Element) => {
+        Element.onclick = () => {
+          window.open(Element.dataset.link, '', 'width=500,height=400')
+        }
+      })
+    </script>
+</body>
+</html>

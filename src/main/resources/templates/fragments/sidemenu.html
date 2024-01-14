@@ -1,0 +1,30 @@
+<aside th:fragment="aside-menu">
+  <ul id="slide-out" class="side-nav fixed">
+    <li>
+      <div class="user-view">
+        <a href="/"><img class="circle" src="/img/user.jpg"></a>
+        <a href="#"><span class="black-text name">!full name!</span></a>
+        <a href="#"><span class="black-text email">!tipe user!</span></a>
+      </div>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">User</a></li>
+    <li><a class="waves-effect" th:href="@{'/user/create'}">Create</a></li>
+    <li><a class="waves-effect" th:href="@{'/user'}">List</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Room</a></li>
+    <li><a class="waves-effect" th:href="@{'/room/create'}">Create</a></li>
+    <li><a class="waves-effect" th:href="@{'/room'}">List</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Reservation</a></li>
+    <li><a class="waves-effect" th:href="@{'/reservation/create'}">Create</a></li>
+    <li><a class="waves-effect" th:href="@{'/reservation/review'}">Review</a></li>
+    <li><a class="waves-effect" th:href="@{'/reservation'}">List</a></li>
+  </ul>
+</aside>

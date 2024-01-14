@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/htmlhead::head}">
+</head>
+
+<body>
+    <nav th:replace="~{fragments/header::header}">
+    </nav>
+    <aside th:replace="~{fragments/sidemenu::aside-menu}">
+    </aside>
+    <main>
+        <div class="container">
+            <h3 class="header">Create User</h3>
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="row">
+                            <form class="col s12" method="post">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <label for="username">Username</label>
+                                        <input id="username" type="text" autocomplete="off">
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <label for="name">Name</label>
+                                        <input id="name" type="text" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <label for="password">Password</label>
+                                        <input id="password" name="password" type="password" autocomplete="off">
+                                    </div>
+                                    <div class="col s6">
+                                        <label for="usertype">User Type</label>
+                                        <select id="usertype" name="usertype">
+                                            <option value="" disabled selected>User Type</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="User">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12" style="text-align: right;">
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                                            Submit <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer::footer}">
+    </footer>
+    <div th:replace="~{fragments/generalscript::generalscript}">
+    </div>
+</body>
+</html>
