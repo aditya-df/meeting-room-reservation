@@ -22,12 +22,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Room 1</td>
+                  <tr th:each="Reservation : ${ReservationList}">
+                    <td th:text="${Reservation.room_id}"></td>
                     <td style="text-align: center;">
-                        <a th:href="@{/reservation/1}" class="btn waves-effect waves-light">
-                            <i class="material-icons">search</i>
-                        </a>
+                      <a th:href="@{/reservation/{id}(id=${Reservation.id})}" class="btn waves-effect waves-light">
+                        <i class="material-icons">search</i>
+                      </a>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

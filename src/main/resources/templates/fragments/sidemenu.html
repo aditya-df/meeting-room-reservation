@@ -3,8 +3,8 @@
     <li>
       <div class="user-view">
         <a href="/"><img class="circle" src="/img/user.jpg"></a>
-        <a href="#"><span class="black-text name">!full name!</span></a>
-        <a href="#"><span class="black-text email">!tipe user!</span></a>
+        <a href="#"><span class="black-text name" th:text="${session.Username}"></span></a>
+        <a href="#"><span class="black-text email" th:text="${session.UserLoginRole}"></span></a>
       </div>
     </li>
     <li>

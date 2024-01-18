@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import jakarta.annotation.Nullable;
-import lombok.NonNull;
 import tkba.team6.roomreservationsystem.db.entity.Reservations;
 
 @Repository
@@ -16,5 +15,9 @@ public interface ReservationRepository extends CrudRepository<Reservations, Long
 
     Optional<Reservations> findById(long id);
 
-    List<@NonNull Reservations> findAll();
+    List<Reservations> findAll();
+
+    List<Reservations> findByStatus(String string);
+
+    Optional<Reservations> findByStatusAndId(String string, long id);
 }

@@ -39,6 +39,7 @@ public class SignController {
 			}
 
 			session.setAttribute("UserLoginId", user.getId());
+			session.setAttribute("Username", user.getUsername());
 			session.setAttribute("UserLoginRole", user.getRole());
 
 			response.sendRedirect(request.getContextPath());

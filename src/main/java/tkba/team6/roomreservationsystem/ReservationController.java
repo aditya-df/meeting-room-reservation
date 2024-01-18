@@ -35,7 +35,7 @@ public class ReservationController {
 	public String index(HttpServletRequest request, Model model) {
 		List<Reservations> ReservationList = ReservationService.getAllReservation();
 
-		model.addAttribute(ReservationList);
+		model.addAttribute("ReservationList", ReservationList);
 
 		return "page/reservation/index";
 	}
@@ -51,9 +51,7 @@ public class ReservationController {
 			Long room = Long.parseLong(request.getParameter("room"));
 	
 			String dateRequest = request.getParameter("date");
-			System.out.println(dateRequest);
 			Date date = Date.valueOf(dateRequest);
-			System.out.println(date);
 			
 			String startTimeRequest = request.getParameter("startTime");
 			DateFormat formatterTime = new SimpleDateFormat("HH:mm");
@@ -62,7 +60,6 @@ public class ReservationController {
 			String endTimeRequest = request.getParameter("endTime");
 			Time endTIme = new Time(formatterTime.parse(endTimeRequest).getTime());
 
-			// String description = request.getParameter("description");
 			String snackRequest = request.getParameter("snackRequest");
 	
 			Reservations Reservations = new Reservations();
@@ -74,7 +71,9 @@ public class ReservationController {
 			Reservations.setStatus("pending");
 			Reservations.setRequest_snack(snackRequest);
 	
-			ReservationRepository.save(Reservations);
+			Reservations ReservationsInsert = ReservationRepository.save(Reservations);
+
+			System.out.println(ReservationsInsert.getId());
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
@@ -84,7 +83,39 @@ public class ReservationController {
 
 	@GetMapping("/review")
 	public String review(HttpServletRequest request, Model model) {
+		List<Reservations> ReservationList = ReservationService.getReservationOnPending();
+
+		model.addAttribute("ReservationList", ReservationList);
+
 		return "page/reservation/review";
+	}
+
+	@PostMapping("/approve/{id}")
+	public void approve(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) 
+			throws Exception {
+		HttpSession session = request.getSession();
+
+		try {
+			ReservationService.approveReservation(id);
+		} catch (Exception e) {
+			session.setAttribute("errorMessage", e.getMessage());
+		}
+
+		response.sendRedirect(request.getContextPath() + "/reservation/review");
+	}
+
+	@PostMapping("/reject/{id}")
+	public void reject(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) 
+			throws Exception {
+		HttpSession session = request.getSession();
+
+		try {
+			ReservationService.rejectReservation(id);
+		} catch (Exception e) {
+			session.setAttribute("errorMessage", e.getMessage());
+		}
+
+		response.sendRedirect(request.getContextPath() + "/reservation/review");
 	}
 
 	@GetMapping("/{id}")
@@ -101,9 +132,9 @@ public class ReservationController {
 
 		} catch (NullPointerException e) {
 			session.setAttribute("errorMessage", e.getMessage());
-			response.sendRedirect(null);
+			response.sendRedirect(request.getContextPath() + "/reservation");
 		}
 
-		return "page/room/detail";
+		return "page/reservation/detail";
 	}
 }

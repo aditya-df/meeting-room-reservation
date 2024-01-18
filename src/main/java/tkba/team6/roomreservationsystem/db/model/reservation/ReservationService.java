@@ -21,7 +21,31 @@ public class ReservationService {
         return ReservationRepository.findById(id).orElse(null);
     }
 
-    public final void saveReservation(Reservations Reservation) {
-        ReservationRepository.save(Reservation);
+    public final Reservations saveReservation(Reservations Reservation) {
+        return ReservationRepository.save(Reservation);
+    }
+
+    public final List<Reservations> getReservationOnPending() {
+        return ReservationRepository.findByStatus("pending");
+    }
+
+    public final void rejectReservation (long id) throws Exception {
+        Reservations Reservations = ReservationRepository.findByStatusAndId("pending", id).orElse(null);
+        if (Reservations != null) {
+            Reservations.setStatus("rejected");
+            ReservationRepository.save(Reservations);
+        }else{
+            throw new Exception("Reservation Invalid");
+        }
+    }
+
+    public final void approveReservation (long id) throws Exception {
+        Reservations Reservations = ReservationRepository.findByStatusAndId("pending", id).orElse(null);
+        if (Reservations != null) {
+            Reservations.setStatus("approved");
+            ReservationRepository.save(Reservations);
+        }else{
+            throw new Exception("Reservation Invalid");
+        }
     }
 }
