@@ -1,5 +1,6 @@
 package tkba.team6.roomreservationsystem.db.model.reservation;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class ReservationService {
 
     public final List<Reservations> getReservationOnPending() {
         return ReservationRepository.findByStatus("pending");
+    }
+
+    public final List<Reservations> findByStatusInAndRequestDate(List<String> Status, Date requestDate) {
+        return ReservationRepository.findByStatusInAndRequestDate(Status, requestDate);
     }
 
     public final void rejectReservation (long id) throws Exception {

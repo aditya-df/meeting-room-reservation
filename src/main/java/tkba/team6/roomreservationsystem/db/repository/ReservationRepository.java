@@ -1,5 +1,7 @@
 package tkba.team6.roomreservationsystem.db.repository;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +22,6 @@ public interface ReservationRepository extends CrudRepository<Reservations, Long
     List<Reservations> findByStatus(String string);
 
     Optional<Reservations> findByStatusAndId(String string, long id);
+
+    List<Reservations> findByStatusInAndRequestDate(List<String> Status, Date requestDate, Time startTime, Time endTime);
 }

@@ -1,5 +1,6 @@
 package tkba.team6.roomreservationsystem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/reservation")
@@ -46,7 +49,8 @@ public class ReservationController {
 	}
 
 	@PostMapping("/create")
-	public String createConfirm(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String createConfirm(HttpServletRequest request, HttpServletResponse response, Model model) 
+		throws Exception {
 		try {
 			Long room = Long.parseLong(request.getParameter("room"));
 	
@@ -70,10 +74,21 @@ public class ReservationController {
 			Reservations.setEndTime(endTIme);
 			Reservations.setStatus("pending");
 			Reservations.setRequest_snack(snackRequest);
+
+			List<String> RoomStatus = new ArrayList<>();
+			RoomStatus.add("pending");
+			RoomStatus.add("approved");
+			List<Reservations> RoomList = ReservationService.findByStatusInAndRequestDate(RoomStatus, date);
+
+			for (Reservations Room : RoomList) {
+				
+			}
+			// LocalTime lt = LocalTime.parse("6:00 AM", 
+            //     DateTimeFormatter.ofPattern("h:m a"));
 	
 			Reservations ReservationsInsert = ReservationRepository.save(Reservations);
 
-			System.out.println(ReservationsInsert.getId());
+			response.sendRedirect(request.getContextPath() + "/reservation" + ReservationsInsert.getId());
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
@@ -90,27 +105,20 @@ public class ReservationController {
 		return "page/reservation/review";
 	}
 
-	@PostMapping("/approve/{id}")
-	public void approve(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) 
+	@PostMapping("/{action}/{id}")
+	public void approve(HttpServletRequest request, HttpServletResponse response, @PathVariable String action, @PathVariable Long id) 
 			throws Exception {
 		HttpSession session = request.getSession();
-
+	
 		try {
-			ReservationService.approveReservation(id);
-		} catch (Exception e) {
-			session.setAttribute("errorMessage", e.getMessage());
-		}
-
-		response.sendRedirect(request.getContextPath() + "/reservation/review");
-	}
-
-	@PostMapping("/reject/{id}")
-	public void reject(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) 
-			throws Exception {
-		HttpSession session = request.getSession();
-
-		try {
-			ReservationService.rejectReservation(id);
+			switch (action) {
+				case "approve":
+					ReservationService.approveReservation(id);
+					break;
+				case "reject":
+					ReservationService.rejectReservation(id);
+					break;
+			}
 		} catch (Exception e) {
 			session.setAttribute("errorMessage", e.getMessage());
 		}
@@ -130,6 +138,7 @@ public class ReservationController {
 				throw new NullPointerException("invalid reservatio");
 			}
 
+			model.addAttribute("Reservation", Reservation);
 		} catch (NullPointerException e) {
 			session.setAttribute("errorMessage", e.getMessage());
 			response.sendRedirect(request.getContextPath() + "/reservation");

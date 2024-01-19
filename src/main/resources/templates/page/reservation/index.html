@@ -18,12 +18,14 @@
                 <thead>
                   <tr>
                     <th>Name</th>
+                    <th>Status</th>
                     <th style="text-align: center;">Detial</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:each="Reservation : ${ReservationList}">
                     <td th:text="${Reservation.room_id}"></td>
+                    <td th:text="${Reservation.status}"></td>
                     <td style="text-align: center;">
                       <a th:href="@{/reservation/{id}(id=${Reservation.id})}" class="btn waves-effect waves-light">
                         <i class="material-icons">search</i>
