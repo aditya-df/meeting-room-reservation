@@ -36,16 +36,4 @@ public class UserService {
     public final void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
-
-    public boolean getAccessMenuUser() {
-        return false;
-    }
-
-    public boolean getAccessMenuRoom() {
-        return false;
-    }
-
-    public boolean getAccessMenuRoomReservation() {
-        return false;
-    }
 }

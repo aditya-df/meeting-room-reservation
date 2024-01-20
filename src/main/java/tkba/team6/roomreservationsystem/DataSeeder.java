@@ -38,7 +38,7 @@ public class DataSeeder implements CommandLineRunner {
 			UserAdmin.setRole("Admin");
 			userRepository.save(UserAdmin);
 
-			String passwordHasing = Hasing.converTextToSHA256("admin");
+			String passwordHasing = Hasing.converTextToSHA256("user");
 
 			Users User = new Users();
 			User.setUsername("user");

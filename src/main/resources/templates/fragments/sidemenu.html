@@ -10,21 +10,29 @@
     <li>
       <div class="divider"></div>
     </li>
-    <li><a class="subheader">User</a></li>
-    <li><a class="waves-effect" th:href="@{'/user/create'}">Create</a></li>
-    <li><a class="waves-effect" th:href="@{'/user'}">List</a></li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li><a class="subheader">Room</a></li>
-    <li><a class="waves-effect" th:href="@{'/room/create'}">Create</a></li>
-    <li><a class="waves-effect" th:href="@{'/room'}">List</a></li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li><a class="subheader">Reservation</a></li>
-    <li><a class="waves-effect" th:href="@{'/reservation/create'}">Create</a></li>
-    <li><a class="waves-effect" th:href="@{'/reservation/review'}">Review</a></li>
-    <li><a class="waves-effect" th:href="@{'/reservation'}">List</a></li>
+    <block th:if="${session.UserLoginRole == 'Admin'}">
+      <li><a class="subheader">User</a></li>
+      <li><a class="waves-effect" th:href="@{'/user/create'}">Create</a></li>
+      <li><a class="waves-effect" th:href="@{'/user'}">List</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+    </block>
+    <block th:if="${session.UserLoginRole == 'Admin'}">
+      <li><a class="subheader">Room</a></li>
+      <li><a class="waves-effect" th:href="@{'/room/create'}">Create</a></li>
+      <li><a class="waves-effect" th:href="@{'/room'}">List</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+    </block>
+    <block>
+      <li><a class="subheader">Reservation</a></li>
+      <li><a class="waves-effect" th:href="@{'/reservation/create'}">Create</a></li>
+      <block th:if="${session.UserLoginRole == 'Admin'}">
+        <li><a class="waves-effect" th:href="@{'/reservation/review'}">Review</a></li>
+      </block>
+      <li><a class="waves-effect" th:href="@{'/reservation'}">List</a></li>
+    </block>
   </ul>
 </aside>
