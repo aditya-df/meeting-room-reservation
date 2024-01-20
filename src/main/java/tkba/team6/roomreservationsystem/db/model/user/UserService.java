@@ -21,12 +21,20 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public final Users updateUser(Users users) {
+        return userRepository.save(users);
+    }
+
     public final void saveUser(Users Users) {
         userRepository.save(Users);
     }
 
     public final Users authenticate(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    public final void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
     public boolean getAccessMenuUser() {
