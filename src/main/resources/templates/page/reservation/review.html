@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                   <tr th:each="Reservation : ${ReservationList}">
-                    <td th:text="${Reservation.room_id}"></td>
+                    <td th:text="${Reservation.room.name}"></td>
                     <td class="inner">
                         <form th:action="@{/reservation/approve/{id}(id=${Reservation.id})}" method="post">
                           <button class="btn green">
