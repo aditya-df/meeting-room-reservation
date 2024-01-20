@@ -1,7 +1,8 @@
 package tkba.team6.roomreservationsystem.utilty;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 @FunctionalInterface
 interface HashFunction {
@@ -14,19 +15,14 @@ public class Hasing {
             HashFunction sha256Hasher = input -> {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
                 byte[] hashedBytes = md.digest(input.getBytes());
-    
-                StringBuilder sb = new StringBuilder();
-                for (byte b : hashedBytes) {
-                    sb.append(String.format("%02x", input));
-                }
-    
-                return sb.toString();
+                
+                return Base64.getEncoder().encodeToString(hashedBytes);
             };
-            
+
             return sha256Hasher.hash(text);
         } catch (NoSuchAlgorithmException e) {
         }
-        
+
         return "";
     }
 }

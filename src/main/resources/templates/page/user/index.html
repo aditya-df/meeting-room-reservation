@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head th:replace="~{fragments/htmlhead::head}">
 </head>
+
 <body>
-    <nav th:replace="~{fragments/header::header}">
-    </nav>
-    <aside th:replace="~{fragments/sidemenu::aside-menu}">
-    </aside>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <h3 class="header">User</h3>
-                </div>
-            </div>
-            <table class="striped">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>User Type</th>
-                    <th style="text-align: center;">Detial</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Alvin</td>
-                    <td>Admin</td>
-                    <td style="text-align: center;">
-                        <a th:href="@{/user/1}" class="btn waves-effect waves-light">
-                            <i class="material-icons">search</i>
-                        </a>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
+  <nav th:replace="~{fragments/header::header}">
+  </nav>
+  <aside th:replace="~{fragments/sidemenu::aside-menu}">
+  </aside>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h3 class="header">List User</h3>
         </div>
-    </main>
-    <footer th:replace="~{fragments/footer::footer}">
-    </footer>
-    <div th:replace="~{fragments/generalscript::generalscript}">
+      </div>
+      <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+      </div>
+      <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+      </div>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th style="text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="users: ${UserList}">
+            <td th:text="${users.username}"></td>
+            <td th:text="${users.email}"></td>
+            <td th:text="${users.role}"></td>
+            <td style="text-align: center;">
+              <a th:href="@{/user/edit/{id}(id=${users.id})}" class="btn btn-primary">Update</a>
+
+              <a th:href="@{/user/delete/{id}(id=${users.id})}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </main>
+  <footer th:replace="~{fragments/footer::footer}">
+  </footer>
+  <div th:replace="~{fragments/generalscript::generalscript}">
+  </div>
 </body>
+
 </html>

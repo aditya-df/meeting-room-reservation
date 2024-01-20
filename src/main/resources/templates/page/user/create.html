@@ -16,25 +16,28 @@
                 <div class="card-stacked">
                     <div class="card-content">
                         <div class="row">
-                            <form class="col s12" method="post">
+                            <form class="col s12" th:action="@{/user/create}" method="post">
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <label for="username">Username</label>
-                                        <input id="username" type="text" autocomplete="off">
+                                        <input id="username" name="username" type="text" class="form-control"
+                                            autocomplete="off" required>
                                     </div>
                                     <div class="input-field col s6">
-                                        <label for="name">Name</label>
-                                        <input id="name" type="text" autocomplete="off">
+                                        <label for="email">Email</label>
+                                        <input id="email" name="email" type="email" class="form-control"
+                                            autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <label for="password">Password</label>
-                                        <input id="password" name="password" type="password" autocomplete="off">
+                                        <input id="password" name="password" class="form-control" type="password"
+                                            autocomplete="off" required>
                                     </div>
                                     <div class="col s6">
-                                        <label for="usertype">User Type</label>
-                                        <select id="usertype" name="usertype">
+                                        <label for="role">User Type</label>
+                                        <select id="role" name="role" class="form-control" required>
                                             <option value="" disabled selected>User Type</option>
                                             <option value="Admin">Admin</option>
                                             <option value="User">User</option>

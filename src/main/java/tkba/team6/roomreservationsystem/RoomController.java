@@ -43,8 +43,7 @@ public class RoomController {
 	}
 
 	@PostMapping("/create")
-	public String createConfirm(HttpServletRequest request, HttpServletResponse response, Model model) 
-			throws Exception {
+	public String createConfirm(HttpServletRequest request, HttpServletResponse response, Model model) {
 		HttpSession session = request.getSession();
 
 		try {
@@ -57,12 +56,12 @@ public class RoomController {
 
 			Rooms RoomsInsert = RoomRepository.save(Rooms);
 
-			response.sendRedirect(request.getContextPath() + "/room/" + RoomsInsert.getId());
+			return "redirect:/room/" + RoomsInsert.getId();
 		} catch (Exception e) {
 			session.setAttribute("errorMessage", e.getMessage());
 		}
 
-		return "page/room/create";
+		return "redirect:page/room/create";
 	}
 
 	@GetMapping("/{id}")

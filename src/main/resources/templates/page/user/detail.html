@@ -11,30 +11,36 @@
     </aside>
     <main>
         <div class="container">
-            <h3 class="header">User !Username!</h3>
+            <h3 class="header">Details User</h3>
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <div class="row">
-                            <form class="col s12" method="post">
+                            <form class="col s12" th:action="@{/user/update/{id} (id=${Users.id})}" th:object="${Users}"
+                                method="post">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <label>Username</label>
-                                        <input type="text" autocomplete="off" disabled th:value="${Username}">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control"
+                                            autocomplete="off" disabled th:field="*{username}">
                                     </div>
                                     <div class="input-field col s6">
-                                        <label for="name">Name</label>
-                                        <input id="name" type="text" autocomplete="off">
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email" th:field="*{email}" class="form-control"
+                                            placeholder="Enter Email" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <label for="password">Password</label>
-                                        <input id="password" name="password" type="password" autocomplete="off">
+                                        <input id="password" name="password" type="password" th:field="*{password}"
+                                            class="form-control" placeholder="Enter Password" autocomplete="off"
+                                            required>
                                     </div>
                                     <div class="col s6">
-                                        <label for="usertype">User Type</label>
-                                        <input type="text" value="admin" disabled>
+                                        <label for="role">User Type</label>
+                                        <input id="role" name="role" type="text" th:field="*{role}" class="form-control"
+                                            disabled>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -56,7 +62,7 @@
     <div th:replace="~{fragments/generalscript::generalscript}">
     </div>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('select').material_select();
         });
     </script>

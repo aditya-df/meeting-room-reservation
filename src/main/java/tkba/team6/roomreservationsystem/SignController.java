@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tkba.team6.roomreservationsystem.db.entity.Users;
 import tkba.team6.roomreservationsystem.db.model.user.UserService;
+import tkba.team6.roomreservationsystem.utilty.Hasing;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -31,9 +32,10 @@ public class SignController {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String passwordHasing = Hasing.converTextToSHA256(password);
 
 		try {
-			Users user = userService.authenticate(username, password);
+			Users user = userService.authenticate(username, passwordHasing);
 			if(user == null) {
 				throw new NullPointerException("username / password invalid");
 			}
