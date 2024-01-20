@@ -19,34 +19,29 @@
                                     <div class="col s12">
                                         <label for="room">Room Name</label>
                                         <select name="room" id="room">
-                                            <option value="">RoomName</option>
+                                            <option value="">Room</option>
+                                            <option th:each="Room : ${RoomList}" th:value="${Room.id}" th:text="${Room.name}"></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col s12 m6">
                                         <label for="room">Date</label>
-                                        <input type="text" class="datepicker">
+                                        <input type="text" name="date" class="datepicker">
                                     </div>
                                     <div class="col s6 m3">
                                         <label for="room">Start Time</label>
-                                         <input type="text" class="timepicker">
+                                        <input type="text" name="startTime" class="timepicker">
                                     </div>
                                     <div class="col s6 m3">
-                                        <label for="room">Start end</label>
-                                         <input type="text" class="timepicker">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <label for="description">Description</label>
-                                        <textarea id="description" name="description" class="materialize-textarea"></textarea>
+                                        <label for="room">End Time</label>
+                                         <input type="text" name="endTime" class="timepicker">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <label for="description">Snack Request</label>
-                                        <textarea id="description" name="snack_request" class="materialize-textarea"></textarea>
+                                        <textarea id="description" name="snackRequest" class="materialize-textarea"></textarea>
                                     </div>
                                 </div>
                                 <div class="row">

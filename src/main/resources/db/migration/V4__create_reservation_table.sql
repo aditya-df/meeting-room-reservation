@@ -1,5 +1,5 @@
 CREATE TABLE reservations (
-  id integer PRIMARY KEY,
+  id integer AUTO_INCREMENT PRIMARY KEY,
   request_user integer,
   room_id integer,
   requestDate date,

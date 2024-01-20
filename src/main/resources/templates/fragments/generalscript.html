@@ -9,11 +9,13 @@
       });
 
       $(document).ready(function(){
-        $('.datepicker').pickadate();
+        $('.datepicker').pickadate({format: 'yyyy-mm-dd' });
       });
 
       $(document).ready(function(){
-        $('.timepicker').pickatime();
+        $('.timepicker').pickatime({
+          twelvehour: false,
+        });
       });
   </script>
 </div>

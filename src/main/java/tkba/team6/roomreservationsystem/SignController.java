@@ -1,7 +1,5 @@
 package tkba.team6.roomreservationsystem;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +39,7 @@ public class SignController {
 			}
 
 			session.setAttribute("UserLoginId", user.getId());
+			session.setAttribute("Username", user.getUsername());
 			session.setAttribute("UserLoginRole", user.getRole());
 
 			response.sendRedirect(request.getContextPath());

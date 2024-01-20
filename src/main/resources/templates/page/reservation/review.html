@@ -30,21 +30,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Room 1</td>
+                  <tr th:each="Reservation : ${ReservationList}">
+                    <td th:text="${Reservation.room.name}"></td>
                     <td class="inner">
-                        <form th:action="@{/reservation/approve/1}" method="post">
+                        <form th:action="@{/reservation/approve/{id}(id=${Reservation.id})}" method="post">
                           <button class="btn green">
                             <i class="material-icons">check</i>
                           </button>
                         </form>
-                        <form th:action="@{/reservation/reject/1}" method="post">
+                        <form th:action="@{/reservation/reject/{id}(id=${Reservation.id})}" method="post">
                           <button class="btn red">
                             <i class="material-icons">close</i>
                           </button>
                         </form>
-                        <button class="btn waves-effect waves-light open-room" th:data-link="@{/room/1}">
-                            <i class="material-icons">search</i>
+                        <button class="btn waves-effect waves-light open-room" th:data-link="@{/room/{id}(id=${Reservation.id})}">
+                          <i class="material-icons">search</i>
                         </button>
                     </td>
                   </tr>
